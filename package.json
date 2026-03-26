@@ -16,6 +16,7 @@
     "admin:set-claim": "node scripts/set-admin-claim.mjs"
   },
   "dependencies": {
+    "ajv": "^8.18.0",
     "firebase": "^12.11.0",
     "firebase-admin": "^13.7.0",
     "framer-motion": "^12.37.0",
