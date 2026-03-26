@@ -213,7 +213,7 @@ export function CheckoutForm() {
     }
 
     setStatus("sending");
-    let orderRef = generateOrderRef();
+    const orderRef = generateOrderRef();
     const origin = getSiteOrigin();
 
     const orderLines = items.map((i) => {
@@ -233,29 +233,7 @@ export function CheckoutForm() {
     const orderLinesJson = JSON.stringify(orderLines, null, 0);
     const totalFormatted = formatPrice(totalPrice);
 
-    let persisted = false;
-    try {
-      const res = await fetch("/api/orders", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          orderRef,
-          customer: { ...formData },
-          lines: orderLines,
-          totalAmount: totalPrice,
-          totalFormatted,
-        }),
-      });
-      if (res.ok) {
-        const data = (await res.json()) as { orderRef?: string; persisted?: boolean };
-        if (typeof data.orderRef === "string" && data.orderRef.length >= 4) {
-          orderRef = data.orderRef;
-        }
-        persisted = data.persisted === true;
-      }
-    } catch {
-      // network — may still succeed via Formspree
-    }
+    const persisted = false;
 
     let formspreeOk = !FORMSPREE_ID;
     if (FORMSPREE_ID) {

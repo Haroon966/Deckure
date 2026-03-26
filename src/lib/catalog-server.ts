@@ -1,26 +1,15 @@
-import { unstable_cache } from "next/cache";
 import type { Collection, Product, HeroStripItem } from "@/lib/data";
 import { collections as staticCollections, products as staticProducts } from "@/lib/data";
 import * as q from "@/lib/catalog-queries";
-import { fetchPublishedCatalogFromFirestore } from "@/lib/catalog-firestore";
 
 export const CATALOG_CACHE_TAG = "catalog";
 
-async function loadCatalog(): Promise<{
+export async function getCachedCatalog(): Promise<{
   products: Product[];
   collections: Collection[];
 }> {
-  const remote = await fetchPublishedCatalogFromFirestore();
-  if (remote && remote.products.length > 0) {
-    return remote;
-  }
   return { products: staticProducts, collections: staticCollections };
 }
-
-export const getCachedCatalog = unstable_cache(loadCatalog, ["artzen-catalog-v1"], {
-  revalidate: 120,
-  tags: [CATALOG_CACHE_TAG],
-});
 
 export async function getServerProducts(): Promise<Product[]> {
   const { products } = await getCachedCatalog();

@@ -15,7 +15,7 @@ import { AnimatedStagger } from "@/components/AnimatedStagger";
 type Props = { params: Promise<{ slug: string }> };
 
 export const revalidate = 120;
-export const dynamicParams = true;
+export const dynamicParams = false;
 
 export async function generateStaticParams() {
   const collections = await getServerCollections();

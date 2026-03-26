@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Server mode (no static export) — required for Firebase Admin, Route Handlers,
-  // and Firestore-backed catalog. Use `npm run images:optimize` for local assets.
+  output: "export",
+  trailingSlash: true,
+  // Static export mode for CSR/static hosts. Use `npm run images:optimize` for local assets.
   images: {
     unoptimized: true,
     remotePatterns: [
