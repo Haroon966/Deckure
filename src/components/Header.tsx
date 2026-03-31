@@ -181,7 +181,6 @@ function HeaderInner({ categoryLinks }: { categoryLinks: NavLinkItem[] }) {
       pathname.startsWith("/products"));
   const homeActive = pathname === "/";
   const aboutActive = pathname === "/about";
-  const blogActive = pathname.startsWith("/blog");
 
   const updateOverlayTop = useCallback(() => {
     const nav = document.querySelector("[data-main-nav]");
@@ -467,15 +466,6 @@ function HeaderInner({ categoryLinks }: { categoryLinks: NavLinkItem[] }) {
                   About
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/blog"
-                  className={blogActive ? navLinkActive : navLinkInactive}
-                  aria-current={blogActive ? "page" : undefined}
-                >
-                  Blog
-                </Link>
-              </li>
             </ul>
             <Link
               href="/"
@@ -606,13 +596,6 @@ function HeaderInner({ categoryLinks }: { categoryLinks: NavLinkItem[] }) {
                 onClick={() => setMobileOpen(false)}
               >
                 About
-              </Link>
-              <Link
-                href="/blog"
-                className={`rounded-lg px-3 py-3 font-[var(--font-dm-sans)] text-[15px] text-[var(--text-on-dark-link)] no-underline transition-all duration-[250ms] ease hover:bg-[rgba(237,230,222,0.1)] ${focusRing}`}
-                onClick={() => setMobileOpen(false)}
-              >
-                Blog
               </Link>
             </nav>
           </div>

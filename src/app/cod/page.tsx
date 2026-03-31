@@ -1,13 +1,30 @@
 import type { Metadata } from "next";
-import { getSiteOrigin } from "@/lib/site";
+import { absoluteUrl, getDefaultShareImagePath, getSiteOrigin } from "@/lib/site";
 import { FaqSection } from "@/components/FaqSection";
 import { codFaqItems, faqPageJsonLd } from "@/lib/faq-content";
 
+const origin = getSiteOrigin();
+const description =
+  "Pay when you receive. Artzen offers Cash on Delivery across Pakistan. No advance payment required.";
+const pageUrl = `${origin}/cod`;
+const ogImage = absoluteUrl(getDefaultShareImagePath());
+
 export const metadata: Metadata = {
   title: "Cash on Delivery",
-  description:
-    "Pay when you receive. Artzen offers Cash on Delivery across Pakistan. No advance payment required.",
-  alternates: { canonical: `${getSiteOrigin()}/cod` },
+  description,
+  alternates: { canonical: pageUrl },
+  openGraph: {
+    title: "Cash on Delivery | Artzen",
+    description,
+    url: pageUrl,
+    images: [{ url: ogImage, alt: "Cash on Delivery across Pakistan at Artzen" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Cash on Delivery | Artzen",
+    description,
+    images: [ogImage],
+  },
 };
 
 export default function CODPage() {

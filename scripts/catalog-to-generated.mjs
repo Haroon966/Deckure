@@ -2,7 +2,7 @@
 /**
  * Reads content/catalog.json and writes src/lib/data.generated.ts.
  * Enable with USE_CONTENT_CATALOG=true (e.g. Netlify env) before `next build`.
- * Used with Decap CMS (public/admin/) — see ADMIN.md.
+ * Use when content/catalog.json is your catalog source for static builds.
  */
 
 import fs from "fs";

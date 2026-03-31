@@ -1,12 +1,29 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { getSiteOrigin } from "@/lib/site";
+import { absoluteUrl, getDefaultShareImagePath, getSiteOrigin } from "@/lib/site";
+
+const origin = getSiteOrigin();
+const description =
+  "How to choose Islamic wall art for your home. MDF vs other materials, sizing, and placement. Premium Islamic home decor Pakistan.";
+const pageUrl = `${origin}/guide`;
+const ogImage = absoluteUrl(getDefaultShareImagePath());
 
 export const metadata: Metadata = {
   title: "Buying Guide | How to Choose Islamic Wall Art",
-  description:
-    "How to choose Islamic wall art for your home. MDF vs other materials, sizing, and placement. Premium Islamic home decor Pakistan.",
-  alternates: { canonical: `${getSiteOrigin()}/guide` },
+  description,
+  alternates: { canonical: pageUrl },
+  openGraph: {
+    title: "Buying Guide | How to Choose Islamic Wall Art | Artzen",
+    description,
+    url: pageUrl,
+    images: [{ url: ogImage, alt: "Islamic wall art buying guide by Artzen" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Buying Guide | How to Choose Islamic Wall Art | Artzen",
+    description,
+    images: [ogImage],
+  },
 };
 
 export default function GuidePage() {

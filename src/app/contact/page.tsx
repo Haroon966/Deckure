@@ -1,10 +1,28 @@
 import type { Metadata } from "next";
-import { getSiteOrigin } from "@/lib/site";
+import { absoluteUrl, getDefaultShareImagePath, getSiteOrigin } from "@/lib/site";
+
+const origin = getSiteOrigin();
+const description =
+  "Get in touch with Artzen for orders, support, and custom requests. Reach us on WhatsApp from anywhere in Pakistan.";
+const pageUrl = `${origin}/contact`;
+const ogImage = absoluteUrl(getDefaultShareImagePath());
 
 export const metadata: Metadata = {
   title: "Contact",
-  description: "Get in touch with Artzen. WhatsApp, Pakistan. Premium Islamic wall art.",
-  alternates: { canonical: `${getSiteOrigin()}/contact` },
+  description,
+  alternates: { canonical: pageUrl },
+  openGraph: {
+    title: "Contact | Artzen",
+    description,
+    url: pageUrl,
+    images: [{ url: ogImage, alt: "Contact Artzen" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact | Artzen",
+    description,
+    images: [ogImage],
+  },
 };
 
 export default function ContactPage() {

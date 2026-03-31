@@ -6,7 +6,6 @@ import { useCart } from "@/context/CartContext";
 import { getSiteOrigin, whatsAppOrderLink } from "@/lib/site";
 
 const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID || "";
-const HAS_FIREBASE_PROJECT = Boolean(process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID);
 const LAST_ORDER_KEY = "artzen-last-order";
 
 function formatPrice(price: number) {
@@ -282,7 +281,7 @@ export function CheckoutForm() {
     if (!persisted && !formspreeOk) {
       setStatus("error");
       setErrorDetail(
-        "Orders are not configured: set up Firebase (see FIREBASE_SETUP.md) and/or NEXT_PUBLIC_FORMSPREE_ID, or send your order on WhatsApp."
+        "Orders are not configured: set NEXT_PUBLIC_FORMSPREE_ID, or send your order on WhatsApp."
       );
       return;
     }
@@ -489,7 +488,7 @@ export function CheckoutForm() {
     );
   }
 
-  const showConfigHint = !FORMSPREE_ID && !HAS_FIREBASE_PROJECT;
+  const showConfigHint = !FORMSPREE_ID;
 
   return (
     <form
@@ -704,7 +703,7 @@ export function CheckoutForm() {
           disabled={status === "sending"}
           title={
             showConfigHint
-              ? "Configure Firebase and/or Formspree for online submit, or use WhatsApp"
+              ? "Configure NEXT_PUBLIC_FORMSPREE_ID for online submit, or use WhatsApp"
               : undefined
           }
           className="rounded-md bg-forest px-6 py-3 text-sm font-medium text-cream transition hover:bg-forest/90 disabled:opacity-50"

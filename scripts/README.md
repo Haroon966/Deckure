@@ -22,17 +22,17 @@ node scripts/import-deckure-products.mjs
 
 After running, commit the updated `src/lib/data.generated.ts` and any new files in `public/images/products/`. To refresh data when the live store changes, run the script again.
 
-**Optional — bootstrap Decap / `content/catalog.json`:**
+**Optional — bootstrap `content/catalog.json`:**
 
 ```bash
 WRITE_CATALOG_JSON=true node scripts/import-deckure-products.mjs
 ```
 
-Writes `content/catalog.json` alongside `data.generated.ts` so you can switch to the Git-based admin flow (see [ADMIN.md](../ADMIN.md)).
+Writes `content/catalog.json` alongside `data.generated.ts` as a content-managed catalog source.
 
 ## catalog-to-generated.mjs
 
-Reads `content/catalog.json` and writes `src/lib/data.generated.ts`. Runs only when **`USE_CONTENT_CATALOG=true`** (intended for Netlify/CI when using Decap CMS).
+Reads `content/catalog.json` and writes `src/lib/data.generated.ts`. Runs only when **`USE_CONTENT_CATALOG=true`** (intended for Netlify/CI static builds).
 
 ```bash
 USE_CONTENT_CATALOG=true node scripts/catalog-to-generated.mjs

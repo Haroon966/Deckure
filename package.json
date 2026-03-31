@@ -11,14 +11,11 @@
     "images:optimize": "node scripts/optimize-images.mjs",
     "start": "next start",
     "lint": "eslint",
-    "test:e2e": "playwright test",
-    "seed:firestore": "tsx scripts/seed-firestore.ts",
-    "admin:set-claim": "node scripts/set-admin-claim.mjs"
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "ajv": "^8.18.0",
     "firebase": "^12.11.0",
-    "firebase-admin": "^13.7.0",
     "framer-motion": "^12.37.0",
     "next": "16.1.6",
     "react": "19.2.3",

@@ -102,11 +102,6 @@ export function Footer({ categoryLinks }: { categoryLinks: NavLinkItem[] }) {
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className={linkBase}>
-                  Blog
-                </Link>
-              </li>
-              <li>
                 <Link href="/guide" className={linkBase}>
                   Shopping guide
                 </Link>

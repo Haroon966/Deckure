@@ -19,7 +19,6 @@ import { ProductPdpTabs } from "@/components/ProductPdpTabs";
 
 type Props = { params: Promise<{ slug: string }> };
 
-export const revalidate = 120;
 export const dynamicParams = false;
 
 export async function generateStaticParams() {

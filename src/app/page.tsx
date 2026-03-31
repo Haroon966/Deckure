@@ -39,8 +39,6 @@ export const metadata: Metadata = {
   },
 };
 
-export const revalidate = 120;
-
 export default async function Home() {
   const { products, collections } = await getCachedCatalog();
   const featured = q.getFeaturedProductsFrom(products);

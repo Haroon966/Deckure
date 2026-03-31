@@ -1,41 +1,22 @@
-# Apache config for Next.js static export on shared hosting.
+# Allow unrestricted access to all users, including bots, and allow routing for all pages.
 
-Options -MultiViews
+Options -Indexes
 DirectoryIndex index.html
 
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
+# Preserve true 404 responses for unknown URLs.
+ErrorDocument 404 /404.html
 
-  # Keep direct file and directory requests untouched.
-  RewriteCond %{REQUEST_FILENAME} -f [OR]
-  RewriteCond %{REQUEST_FILENAME} -d
-  RewriteRule ^ - [L]
-
-  # Support extensionless URLs that map to exported HTML files.
-  RewriteCond %{REQUEST_FILENAME}.html -f
-  RewriteRule ^(.+)$ $1.html [L]
-
-  # Last fallback: send unknown routes to static 404 page.
-  RewriteRule ^ /404.html [L]
+<IfModule mod_authz_core.c>
+  Require all granted
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Allow from all
 </IfModule>
 
-<IfModule mod_headers.c>
-  Header set X-Content-Type-Options "nosniff"
-  Header set X-Frame-Options "SAMEORIGIN"
-  Header set Referrer-Policy "strict-origin-when-cross-origin"
-</IfModule>
-
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType text/javascript "access plus 1 month"
-  ExpiresByType image/svg+xml "access plus 1 month"
-  ExpiresByType image/x-icon "access plus 1 month"
-  ExpiresByType image/webp "access plus 1 year"
-  ExpiresByType image/avif "access plus 1 year"
-  ExpiresByType image/png "access plus 1 year"
-  ExpiresByType image/jpeg "access plus 1 year"
-  ExpiresByType font/woff2 "access plus 1 year"
-</IfModule>
+# Explicitly allow all user agents (bots and browsers) in case of robots.txt fallback
+<Files "robots.txt">
+  <IfModule mod_headers.c>
+    Header set Content-Type "text/plain"
+  </IfModule>
+</Files>
